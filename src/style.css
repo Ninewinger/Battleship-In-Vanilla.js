@@ -1,1 +1,46 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+/* battleship board 9*9 */
+h1 {
+  font-size: 2em;
+  text-align: center;
+  color: black;
+  background-color: #f00;
+  padding: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cellId {
+    width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cellHit {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
