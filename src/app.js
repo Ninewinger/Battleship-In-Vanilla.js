@@ -7,7 +7,9 @@ import "./assets/img/4geeks.ico";
 import { eventListeners } from "@popperjs/core";
 
 window.onload = function() {
-  //battleship game 9*9 on click on cell turn red if there is a ship and blue if there is no ship
+
+
+  //battleship game 9*9 on click on cell turn red if sunken part of a ship and blue if there miss
   const cells = document.querySelectorAll(".cell");
   const A1 = document.getElementById("A1");
   const A2 = document.getElementById("A2");
@@ -96,41 +98,82 @@ window.onload = function() {
   // 3 = a missed shot
   let gameBoard = [
     ["","A","B","C","D","E","F","G","H","I"],
-    ["1",1,1,1,1,1,0,0,0,0,1],
-    ["2",0,0,0,0,0,0,0,0,0,1],
-    ["3",0,0,0,0,0,0,0,0,0,1],
-    ["4",0,0,0,0,0,0,0,0,0,1],
-    ["5",0,0,0,0,0,0,0,0,0,0],
-    ["6",1,0,0,1,1,0,0,0,0,0],
-    ["7",1,0,0,0,0,0,0,0,0,0],
-    ["8",1,0,0,0,0,0,0,0,0,0],
-    ["9",1,1,1,1,0,0,0,0,0,0]
-    
-
+    [1,1,1,1,1,1,0,0,0,0,1],
+    [2,0,0,0,0,0,0,0,0,0,1],
+    [3,0,0,0,0,0,0,0,0,0,1],
+    [4,0,0,0,0,0,0,0,0,0,1],
+    [5,0,0,0,0,0,0,0,0,0,0],
+    [6,1,0,0,1,1,0,0,0,0,0],
+    [7,1,0,0,0,0,0,0,0,0,0],
+    [8,1,0,0,0,0,0,0,0,0,0],
+    [9,1,1,1,1,0,0,0,0,0,0]
   ];
 
-  //if a cell is clicked, change the class to cellHit or cellMiss depending on the value of the gameBoard
-  function gameBoardHit(cell) {
-    if (gameBoard[cell.id[0]][cell.id[1]] === 1) {
-      cell.className = "cellHit";
-    } else if (gameBoard[cell.id[0]][cell.id[1]] === 0) {
-      cell.className = "cellMiss";
+  function letterToNumber(letter) {
+    if(letter === "A") {
+      return 1;
+    } else if(letter === "B") {
+      return 2;
+    } else if(letter === "C") {
+      return 3;
+    } else if(letter === "D") {
+      return 4;
+    } else if(letter === "E") {
+      return 5;
+    } else if(letter === "F") {
+      return 6;
+    } else if(letter === "G") {
+      return 7;
+    } else if(letter === "H") {
+      return 8;
+    } else if(letter === "I") {
+      return 9;
     }
   }
 
+  function gameBoardId(id) {
+    let lett = id.charAt(0);
+    let col = letterToNumber(lett);
+    let row = id.charAt(1);
+    return gameBoard[row][col];
+  }  
+  
+  cells.addEventListener("click", function() {
+    if(gameBoardId(A1) === 0) {
+      A1.className = "cellMiss";
+      gameBoard[1][1] = 3;
+    } else if(gameBoardId(A1) === 1) {
+      A1.className = "cellHit";
+      gameBoard[1][1] = 2;
+    }
+    if(gameBoardId(A2) === 0) {
+      A2.className = "cellMiss";
+      gameBoard[1][2] = 3;
+    } else if(gameBoardId(A2) === 1) {
+      A2.className = "cellHit";
+      gameBoard[1][2] = 2;
+    }
+    if(gameBoardId(A3) === 0) {
+      A3.className = "cellMiss";
+      gameBoard[1][3] = 3;
+    } else if(gameBoardId(A3) === 1) {
+      A3.className = "cellHit";
+      gameBoard[1][3] = 2;
+    }
+    if(gameBoardId(A4) === 0) {
+      A4.className = "cellMiss";
+      gameBoard[1][4] = 3;
+    } else if(gameBoardId(A4) === 1) {
+      A4.className = "cellHit";
+      gameBoard[1][4] = 2;
+    };
+    if(gameBoardId(A5) === 0) {
+      A5.className = "cellMiss";
+      gameBoard[1][5] = 3;
+    } else if(gameBoardId(A5) === 1) {
+      A5.className = "cellHit";
+      gameBoard[1][5] = 2;
+    }
+  });
 
-  function fire() {
-    let x = document.getElementById("x").value;
-    let y = document.getElementById("y").value;
-    let cell = document.getElementById(x + y);
-    if (gameBoard[y][x] === 1) {
-      cell.style.backgroundColor = "red";
-      gameBoard[y][x] = 2;
-    } else if (gameBoard[y][x] === 0) {
-      cell.style.backgroundColor = "blue";
-      gameBoard[y][x] = 3
-  }
-}
-
-  console.log("Hello Rigo from the console!");
 };

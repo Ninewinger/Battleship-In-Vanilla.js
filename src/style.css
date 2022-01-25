@@ -24,6 +24,13 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+.cell:hover {
+  background-color: #e1e1e1;
+}
+.cell:active {
+  background-color: #d1d1d1;
+  border-color: ivory;
+}
 .cellId {
     width: 50px;
   height: 50px;
@@ -40,6 +47,16 @@ h1 {
   border: 1px solid black;
   border-radius: 5px;
   background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cellMiss {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: blue;
   display: flex;
   justify-content: center;
   align-items: center;
