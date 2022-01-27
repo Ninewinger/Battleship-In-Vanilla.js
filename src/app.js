@@ -2,7 +2,7 @@ window.onload = function() {
 
 
   //battleship game 9*9 on click on cell turn red if sunken part of a ship and blue if there miss
-  const cells = document.querySelectorAll(".cell");
+  const board = document.getElementById('shoots');
   const A1 = document.getElementById("A1");
   const A2 = document.getElementById("A2");
   const A3 = document.getElementById("A3");
@@ -84,23 +84,56 @@ window.onload = function() {
   const I7 = document.getElementById("I7");
   const I8 = document.getElementById("I8");
   const I9 = document.getElementById("I9");
+  
+  //generate an array of arrays with the coordinates of the ships randomly placed
   // 0 = empty
   // 1 = part of a ship
   // 2 = a sunken part of a ship
   // 3 = a missed shot
-  let gameBoard = [
-    ["","A","B","C","D","E","F","G","H","I"],
-    [1,1,1,1,1,1,0,0,0,1],
-    [2,0,0,0,0,0,0,0,0,1],
-    [3,0,0,0,0,0,0,0,0,1],
-    [4,0,0,0,0,0,0,0,0,1],
-    [5,0,0,0,0,0,0,0,0,0],
-    [6,1,0,1,1,0,0,0,0,0],
-    [7,1,0,0,0,0,0,0,0,0],
-    [8,1,0,0,0,0,0,0,0,0],
-    [9,1,1,1,1,0,0,0,0,0]
-  ];
-  console.log(gameBoard[1][1]);
+  function randomGameBoard(){
+    let gameBoard = [
+      ["", "A", "B", "C", "D", "E", "F", "G", "H", "I"],
+      ["1",0,0,0,0,0,0,0,0,0],
+      ["2",0,0,0,0,0,0,0,0,0],
+      ["3",0,0,0,0,0,0,0,0,0],
+      ["4",0,0,0,0,0,0,0,0,0],
+      ["5",0,0,0,0,0,0,0,0,0],
+      ["6",0,0,0,0,0,0,0,0,0],
+      ["7",0,0,0,0,0,0,0,0,0],
+      ["8",0,0,0,0,0,0,0,0,0],
+      ["9",0,0,0,0,0,0,0,0,0]
+    ];
+    for(let i = 1; i < 10; i++){
+      for(let j = 1; j < 10; j=j+3){
+        if(Math.floor(Math.random()*100) < 15){
+          gameBoard[i][j] = 1;
+          gameBoard[i][j+1] = 1;
+          gameBoard[i][j+2] = 1;
+        }
+        else{
+          gameBoard[i][j] = 0;
+        }
+      }
+    }
+    return gameBoard;
+  };
+
+  let gameBoard = randomGameBoard();
+  console.log(gameBoard);
+
+  //show number of shoots (clicks) to win the game
+  function showShips(){
+    let shoots = 0;
+    for(let i = 0; i < 10; i++){
+      for(let j = 0; j < 10; j++){
+        if(gameBoard[i][j] === 1){
+          shoots++;
+        }
+      }
+    }
+    return shoots;    
+  };    
+  let ships = showShips();
 
   function letterToNumber(letter) {
     if(letter === "A") {
@@ -130,20 +163,41 @@ window.onload = function() {
     let row = id.slice(1,2);
     return gameBoard[col][row];
   }  
+  let missed = 0;
+  let hited = 0;
+
+  //show the game board
+  function showGameBoard(){
+    board.innerHTML = "ships: " + ships + "  missed: " + missed + "  hited: " + hited;
+  }
+  showGameBoard();
+  
   
   //for each cell add an event listener
-  [A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, B3, B4, B5, B6, B7, B8, B9, C1, C2, C3, C4, C5, C6, C7, C8, C9, D1, D2, D3, D4, D5, D6, D7, D8, D9, E1, E2, E3, E4, E5, E6, E7, E8, E9, F1, F2, F3, F4, F5, F6, F7, F8, F9, G1, G2, G3, G4, G5, G6, G7, G8, G9, H1, H2, H3, H4, H5, H6, H7, H8, H9, I1, I2, I3, I4, I5, I6, I7, I8, I9].forEach((e) => {
+  let cells = [A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, B3, B4, B5, B6, B7, B8, B9, C1, C2, C3, C4, C5, C6, C7, C8, C9, D1, D2, D3, D4, D5, D6, D7, D8, D9, E1, E2, E3, E4, E5, E6, E7, E8, E9, F1, F2, F3, F4, F5, F6, F7, F8, F9, G1, G2, G3, G4, G5, G6, G7, G8, G9, H1, H2, H3, H4, H5, H6, H7, H8, H9, I1, I2, I3, I4, I5, I6, I7, I8, I9]
+  cells.forEach((e) => {
     e.addEventListener("click", (event) => {
+      showGameBoard();
       let id = event.target.id;
-      let cell = gameBoardId(id);
+      let cell = gameBoardId(id);      
       if(cell === 0) {
         event.target.className = "cellMiss";
-        gameBoard[id.slice(1,2)][id.slice(0,1)] = 3;
+        gameBoard[letterToNumber(id.slice(0,1))][id.slice(1,2)] = 3;
+        missed++;
       } else if(cell === 1) {
         event.target.className = "cellHit";
-        gameBoard[id.slice(1,2)][id.slice(0,1)] = 2;
+        gameBoard[letterToNumber(id.slice(0,1))][id.slice(1,2)] = 2;
+        hited++;
       }
+      console.log(gameBoard);  
+      console.log(hited, missed, ships);      
+      if (hited === ships){
+        alert("You won!");
+      }
+      
     });
   });
-  
+
+ 
+
 };
