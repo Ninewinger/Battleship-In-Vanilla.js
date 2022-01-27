@@ -105,7 +105,7 @@ window.onload = function() {
     ];
     for(let i = 1; i < 10; i++){
       for(let j = 1; j < 10; j=j+3){
-        if(Math.floor(Math.random()*100) < 7){
+        if(Math.floor(Math.random()*100) < 10){
           gameBoard[i][j] = 1;
           gameBoard[i][j+1] = 1;
           gameBoard[i][j+2] = 1;
@@ -117,11 +117,17 @@ window.onload = function() {
     }
     for(let i = 1; i < 10; i=i+4){
       for(let j = 1; j < 10; j++){
-        if(Math.floor(Math.random()*100) > 7 && Math.floor(Math.random()*100) < 14){
-          gameBoard[i][j] = 1;
-          gameBoard[i+1][j] = 1;
-          gameBoard[i+2][j] = 1;
-          gameBoard[i+3][j] = 1;
+        let random = Math.floor(Math.random()*100);
+        console.log(random);
+        if(random < 10){
+          if(i < 9){
+            gameBoard[i][j] = 1;
+            gameBoard[i+1][j] = 1;
+            gameBoard[i+2][j] = 1;
+            gameBoard[i+3][j] = 1;
+          } else{
+            gameBoard[i][j] = 0;
+          }
         }
         else{
           gameBoard[i][j] = 0;
@@ -170,6 +176,28 @@ window.onload = function() {
     }
   }
 
+  function numberToLetter(number) {
+    if(number === 1) {
+      return "A";
+    } else if(number === 2) {
+      return "B";
+    } else if(number === 3) {
+      return "C";
+    } else if(number === 4) {
+      return "D";
+    } else if(number === 5) {
+      return "E";
+    } else if(number === 6) {
+      return "F";
+    } else if(number === 7) {
+      return "G";
+    } else if(number === 8) {
+      return "H";
+    } else if(number === 9) {
+      return "I";
+    }
+  }
+
   function gameBoardId(id) {
     let lett = id.slice(0,1);
     let col = letterToNumber(lett);
@@ -181,7 +209,7 @@ window.onload = function() {
 
   //show the game board
   function showGameBoard(){
-    board.innerHTML = "ships: " + ships + "  missed: " + missed + "  hited: " + hited;
+    board.innerHTML = "ships Square: " + ships + "  missed: " + missed + "  hited: " + hited;
   }
   showGameBoard();
   
@@ -211,4 +239,15 @@ window.onload = function() {
     });
   });
 
+  //button to show ships
+  let showShipsButton = document.getElementById("showShips");
+  showShipsButton.addEventListener("click", () => {
+    for(let i = 0; i < 10; i++){
+      for(let j = 0; j < 10; j++){
+        if(gameBoard[i][j] === 1){
+          document.getElementById(numberToLetter(i) + j).className = "showShips";
+        }
+      }
+    }
+  });
 };

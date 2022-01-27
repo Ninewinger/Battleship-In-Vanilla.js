@@ -3,21 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello Rigo with Vanilla.js</title>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous"
-    />
+    <title>BATTLESHIP</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <! –– battleship game ––>
     <h1>BATTLESHIP</h1>
-    <h4 id="shoots"></h4>
+    <div>
+      <h4 id="shoots"></h4>
+    </div>
+
     <div id="game">
-      <! –– battleship board 9*9 ––>
       <div id="board">
         <div class="row">
           <div class="cellId" id="empty"></div>
@@ -140,6 +135,11 @@
           <div class="cell" id="I9"></div>
         </div>
     </div>
+    <div id="button">
+      <button id="showShips">Show Ships</button>
+    </div>
+    
+
     <script src="app.js"></script>
   </body>
 </html>
