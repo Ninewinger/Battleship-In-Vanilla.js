@@ -105,10 +105,23 @@ window.onload = function() {
     ];
     for(let i = 1; i < 10; i++){
       for(let j = 1; j < 10; j=j+3){
-        if(Math.floor(Math.random()*100) < 15){
+        if(Math.floor(Math.random()*100) < 7){
           gameBoard[i][j] = 1;
           gameBoard[i][j+1] = 1;
           gameBoard[i][j+2] = 1;
+        }
+        else{
+          gameBoard[i][j] = 0;
+        }
+      }
+    }
+    for(let i = 1; i < 10; i=i+4){
+      for(let j = 1; j < 10; j++){
+        if(Math.floor(Math.random()*100) > 7 && Math.floor(Math.random()*100) < 14){
+          gameBoard[i][j] = 1;
+          gameBoard[i+1][j] = 1;
+          gameBoard[i+2][j] = 1;
+          gameBoard[i+3][j] = 1;
         }
         else{
           gameBoard[i][j] = 0;
@@ -197,7 +210,5 @@ window.onload = function() {
       
     });
   });
-
- 
 
 };
