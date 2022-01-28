@@ -108,17 +108,24 @@ h1 {
   border: 1px solid rgb(252, 39, 39);
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 50px;
+  margin: 50px;
   font-size: 20px;
   width: 350px;
   margin: auto;
-  display: block;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-align: center;
 }
-#button {
-  margin-top: 20px;
-  margin: auto;
+.board {
   display: flex;
-  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+#button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 35px;
 }
